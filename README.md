@@ -1,7 +1,7 @@
 # VimConfigWindows
 my vim config for windows with ycm working
 
-I made YCM works in windows just following the full instalation guide of ycm with maybe a few varations
+I made YCM works in windows just following the [full instalation guide](https://github.com/Valloric/YouCompleteMe#full-installation-guide)  of ycm with maybe a few varations
 
 I used **VS2017 64** with **clang** and **VS v140 pack** options marked 
 #
