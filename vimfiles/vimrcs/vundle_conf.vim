@@ -13,6 +13,12 @@ Plugin 'VundleVim/Vundle.vim'
 "PLUGGINS
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'SirVer/ultisnips'
+Plugin 'othree/html5.vim'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'arcticicestudio/nord-vim'
+Plugin 'curist/vim-angular-template'
+Plugin 'javascript-libraries-syntax'
+Plugin 'w0rp/ale'
 "//PLUGINS
 
 

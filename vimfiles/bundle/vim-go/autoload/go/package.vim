@@ -46,7 +46,7 @@ function! go#package#Paths() abort
     let dirs += [s:goroot]
   endif
 
-  let workspaces = split(go#path#Detect(), go#util#PathListSep())
+  let workspaces = split(go#path#Default(), go#util#PathListSep())
   if workspaces != []
     let dirs += workspaces
   endif
@@ -54,8 +54,14 @@ function! go#package#Paths() abort
   return dirs
 endfunction
 
+let s:import_paths = {}
 " ImportPath returns the import path in the current directory it was executed
 function! go#package#ImportPath() abort
+  let dir = expand("%:p:h")
+  if has_key(s:import_paths, dir)
+    return s:import_paths[dir]
+  endif
+
   let out = go#tool#ExecuteInDir("go list")
   if go#util#ShellError() != 0
     return -1
@@ -69,6 +75,8 @@ function! go#package#ImportPath() abort
     return -1
   endif
 
+  let s:import_paths[dir] = import_path
+
   return import_path
 endfunction
 
@@ -80,6 +88,7 @@ function! go#package#FromPath(arg) abort
   for dir in dirs
     if len(dir) && match(path, dir) == 0
       let workspace = dir
+      break
     endif
   endfor
 
@@ -87,10 +96,12 @@ function! go#package#FromPath(arg) abort
     return -1
   endif
 
+  let path = substitute(path, '/*$', '', '')
+  let workspace = substitute(workspace . '/src/', '/+', '', '')
   if isdirectory(path)
-    return substitute(path, workspace . 'src/', '', '')
+    return substitute(path, workspace, '', '')
   else
-    return substitute(substitute(path, workspace . 'src/', '', ''),
+    return substitute(substitute(path, workspace, '', ''),
           \ '/' . fnamemodify(path, ':t'), '', '')
   endif
 endfunction

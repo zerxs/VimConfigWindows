@@ -1,0 +1,7 @@
+set runtimepath+=$HOME
+
+"source $HOME\basic.vim
+
+try
+source my_configs.vim
+endtry

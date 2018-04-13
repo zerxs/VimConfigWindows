@@ -1,4 +1,5 @@
 set runtimepath+=$HOME
+set runtimepath^=$HOME\vimfiles\bundle\ctrlp.vim
 
 source $HOME\vimfiles\vimrcs\basic.vim
 source $HOME\vimfiles\vimrcs\filetypes.vim
